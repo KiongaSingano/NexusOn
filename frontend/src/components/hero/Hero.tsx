@@ -3,13 +3,16 @@ import { Link } from "react-router-dom";
 import {
   ArrowRight,
   CheckCircle2,
-  ChevronRight,
   Lightbulb,
   Play,
   Rocket,
-  Search,
+  Sparkles,
   Users,
 } from "lucide-react";
+
+import studentsTech from "../../assets/hero/students-tech.jpg";
+import studentsProject from "../../assets/hero/students-project.jpg";
+import studentsPresentation from "../../assets/hero/students-presentation.jpg";
 
 const rotatingWords = [
   "uma ideia",
@@ -43,9 +46,8 @@ export default function Hero() {
 
       setTimeout(() => {
         setWordIndex(
-          (current) => (current + 1) % rotatingWords.length,
+          (current) => (current + 1) % rotatingWords.length
         );
-
         setVisible(true);
       }, 250);
     }, 3000);
@@ -56,120 +58,132 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="relative min-h-[calc(100vh-5rem)] overflow-hidden bg-white"
+      className="relative min-h-screen overflow-hidden bg-slate-50"
     >
-      {/* Background */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -right-32 -top-32 h-[500px] w-[500px] rounded-full bg-blue-100/70 blur-3xl" />
+      {/* ================================================= */}
+      {/* BACKGROUND */}
+      {/* ================================================= */}
 
-        <div className="absolute -bottom-40 -left-40 h-[450px] w-[450px] rounded-full bg-blue-50 blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        {/* Glow principal */}
+        <div className="absolute -right-40 -top-40 h-[550px] w-[550px] rounded-full bg-blue-200/50 blur-3xl" />
 
+        <div className="absolute -bottom-52 -left-52 h-[600px] w-[600px] rounded-full bg-blue-100/70 blur-3xl" />
+
+        {/* Mancha azul escura */}
+        <div className="absolute right-[8%] top-[18%] h-[420px] w-[420px] rounded-full bg-blue-600/10 blur-[100px]" />
+
+        {/* Grid */}
         <div
           className="absolute inset-0 opacity-[0.035]"
           style={{
             backgroundImage:
-              "radial-gradient(#2563eb 1px, transparent 1px)",
-            backgroundSize: "26px 26px",
+              "linear-gradient(#2563eb 1px, transparent 1px), linear-gradient(90deg, #2563eb 1px, transparent 1px)",
+            backgroundSize: "45px 45px",
           }}
         />
       </div>
 
-      <div className="relative mx-auto flex min-h-[calc(100vh-5rem)] max-w-7xl items-center px-5 py-14 sm:px-6 sm:py-20 lg:px-8">
-        <div className="grid w-full items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+      {/* ================================================= */}
+      {/* CONTEÚDO */}
+      {/* ================================================= */}
+
+      <div className="relative mx-auto flex min-h-screen max-w-7xl items-center px-5 pb-16 pt-28 sm:px-6 lg:px-8 lg:pt-24">
+        <div className="grid w-full items-center gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12">
 
           {/* ================================================= */}
           {/* TEXTO */}
           {/* ================================================= */}
 
-          <div className="max-w-2xl">
+          <div className="relative z-10 max-w-2xl">
 
             {/* Badge */}
-            <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-3.5 py-2 text-xs font-semibold text-blue-700 sm:text-sm">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white/80 px-3.5 py-2 text-xs font-semibold text-blue-700 shadow-sm backdrop-blur sm:text-sm">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-500 opacity-60" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-600" />
               </span>
 
-              Um ecossistema para quem quer construir
+              Da Ideia à Projeto. Do Projeto à Solução.
             </div>
 
             {/* Título */}
-<h1 className="text-[2.9rem] font-bold leading-[1.03] tracking-tight text-slate-950 sm:text-6xl lg:text-[4.4rem] xl:text-[5rem]">
-  <span className="block">
-    Tens{" "}
-    <span className="relative inline-grid min-w-[9.5ch] align-baseline">
-      <span
-        className={`col-start-1 row-start-1 text-blue-600 transition-all duration-300 ${
-          visible
-            ? "translate-y-0 opacity-100"
-            : "translate-y-2 opacity-0"
-        }`}
-      >
-        {rotatingWords[wordIndex]}
-      </span>
-    </span>
-  </span>
+            <h1 className="text-[2.8rem] font-bold leading-[1.04] tracking-tight text-slate-950 sm:text-6xl lg:text-[4.4rem] xl:text-[4.8rem]">
+              <span className="block">
+                Tens{" "}
+                <span className="relative inline-grid min-w-[9.5ch] align-baseline">
+                  <span
+                    className={`col-start-1 row-start-1 text-blue-600 transition-all duration-300 ${
+                      visible
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-2 opacity-0"
+                    }`}
+                  >
+                    {rotatingWords[wordIndex]}
+                  </span>
+                </span>
+              </span>
 
-  <span className="block">
-    que merece
-  </span>
+              <span className="block">
+                que merece
+              </span>
 
-  <span className="block">
-    sair do papel?
-  </span>
-</h1>
+              <span className="block">
+                sair do papel?
+              </span>
+            </h1>
 
             {/* Descrição */}
-            <p className="mt-7 max-w-xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
+            <p className="mt-6 max-w-xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
               No{" "}
-              <strong className="font-semibold text-slate-900">
-                NexusOn
+              <strong className="font-semibold text-slate-950">
+                Nexus<span className="text-blue-600">On</span>
               </strong>
-              , encontras orientação, tecnologia, recursos e
-              acompanhamento para transformar conhecimento e ideias
-              em projetos reais.
+              , encontras orientação, tecnologia e acompanhamento
+              para transformar conhecimento e ideias em projetos reais.
             </p>
 
             {/* Botões */}
-<div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
 
-  <Link
-    to="/criar-conta"
-    className="group flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-xl shadow-blue-600/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-2xl"
-  >
-    Começar agora
+              <Link
+                to="/criar-conta"
+                className="group flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-xl shadow-blue-600/20 transition-all duration-300 hover:-translate-y-1 hover:bg-blue-700 hover:shadow-2xl"
+              >
+                Começar agora
 
-    <ArrowRight
-      size={18}
-      className="transition-transform duration-300 group-hover:translate-x-1"
-    />
-  </Link>
+                <ArrowRight
+                  size={18}
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                />
+              </Link>
 
-  <Link
-    to="/como-funciona"
-    className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 transition-all duration-300 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600"
-  >
-    <Play size={15} fill="currentColor" />
+              <Link
+                to="/como-funciona"
+                className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white/80 px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600"
+              >
+                <Play size={15} fill="currentColor" />
 
-    Como funciona
-  </Link>
-
-</div>
+                Como funciona
+              </Link>
+            </div>
 
             {/* Features */}
-            <div className="mt-9 flex flex-wrap gap-x-6 gap-y-3">
+            <div className="mt-8 flex flex-wrap gap-x-5 gap-y-3">
               {features.map((feature) => {
                 const Icon = feature.icon;
 
                 return (
                   <div
                     key={feature.text}
-                    className="flex items-center gap-2 text-sm text-slate-500"
+                    className="flex items-center gap-2 text-sm font-medium text-slate-500"
                   >
-                    <Icon
-                      size={16}
-                      className="text-blue-600"
-                    />
+                    <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-100">
+                      <Icon
+                        size={15}
+                        className="text-blue-600"
+                      />
+                    </span>
 
                     {feature.text}
                   </div>
@@ -177,23 +191,94 @@ export default function Hero() {
               })}
             </div>
 
+            {/* Pequeno indicador */}
+            <div className="mt-8 flex items-center gap-3">
+              <div className="flex -space-x-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-slate-50 bg-blue-600 text-[10px] font-bold text-white">
+                  N
+                </div>
+
+                <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-slate-50 bg-slate-800 text-[10px] font-bold text-white">
+                  +
+                </div>
+              </div>
+
+              <p className="text-xs text-slate-500">
+                Um espaço para estudantes, criadores e futuros
+                empreendedores.
+              </p>
+            </div>
           </div>
 
           {/* ================================================= */}
-          {/* MOCKUP / PRODUTO */}
+          {/* ÁREA VISUAL */}
           {/* ================================================= */}
 
-          <div className="relative mx-auto w-full max-w-[580px] lg:ml-auto">
+          <div className="relative mx-auto h-[520px] w-full max-w-[600px] sm:h-[600px]">
 
-            {/* Glow */}
-            <div className="absolute -inset-8 rounded-[4rem] bg-blue-600/10 blur-3xl" />
+            {/* Forma azul de fundo */}
+            <div className="absolute right-4 top-12 h-[420px] w-[420px] rounded-[4rem] bg-blue-600/10 rotate-6 blur-sm" />
 
-            {/* Cards flutuantes */}
-            <div className="absolute -left-3 top-16 z-20 hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-xl sm:block lg:-left-8">
+            <div className="absolute right-8 top-20 h-[400px] w-[400px] rounded-[4rem] bg-blue-600" />
+
+            {/* Imagem principal */}
+            <div className="absolute right-0 top-8 z-10 h-[350px] w-[82%] overflow-hidden rounded-[2rem] border-8 border-white shadow-2xl transition-transform duration-500 hover:-translate-y-2 hover:rotate-1 sm:h-[400px]">
+              <img
+                src={studentsTech}
+                alt="Estudantes trabalhando com tecnologia"
+                className="h-full w-full object-cover"
+              />
+
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-transparent" />
+
+              <div className="absolute bottom-5 left-5 right-5">
+                <div className="rounded-xl border border-white/20 bg-white/15 p-3 text-white backdrop-blur-md">
+                  <div className="flex items-center gap-2">
+                    <Sparkles size={16} />
+
+                    <span className="text-xs font-semibold">
+                      Ideias ganham direção
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Segunda imagem */}
+            <div className="absolute bottom-8 left-0 z-20 h-[210px] w-[58%] overflow-hidden rounded-[1.7rem] border-8 border-white shadow-2xl transition-transform duration-500 hover:-translate-y-2 hover:-rotate-2 sm:h-[245px]">
+              <img
+                src={studentsProject}
+                alt="Estudantes desenvolvendo um projeto"
+                className="h-full w-full object-cover"
+              />
+
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 to-transparent" />
+
+              <div className="absolute bottom-4 left-4">
+                <p className="text-[10px] text-white/80">
+                  Desenvolvimento
+                </p>
+
+                <p className="text-sm font-bold text-white">
+                  Projeto em construção
+                </p>
+              </div>
+            </div>
+
+            {/* Terceira imagem */}
+            <div className="absolute -right-2 bottom-0 z-30 h-[155px] w-[42%] overflow-hidden rounded-[1.5rem] border-8 border-white shadow-2xl transition-transform duration-500 hover:-translate-y-2 hover:rotate-2 sm:h-[180px]">
+              <img
+                src={studentsPresentation}
+                alt="Estudantes apresentando um projeto"
+                className="h-full w-full object-cover"
+              />
+            </div>
+
+            {/* Card mentor */}
+            <div className="absolute -left-2 top-24 z-40 hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-xl sm:block lg:-left-8">
               <div className="flex items-center gap-3">
-
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50">
-                  <Search
+                  <Users
                     size={19}
                     className="text-blue-600"
                   />
@@ -201,20 +286,19 @@ export default function Hero() {
 
                 <div>
                   <p className="text-[10px] text-slate-400">
-                    Procurar
+                    NexusOn
                   </p>
 
                   <p className="text-xs font-bold text-slate-900">
-                    Encontra um mentor
+                    Orientação encontrada
                   </p>
                 </div>
-
               </div>
             </div>
 
-            <div className="absolute -bottom-5 -right-3 z-20 hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-xl sm:block lg:-right-7">
+            {/* Card projeto */}
+            <div className="absolute -right-2 top-[58%] z-40 hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-xl sm:block lg:-right-8">
               <div className="flex items-center gap-3">
-
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-green-50">
                   <CheckCircle2
                     size={19}
@@ -231,181 +315,26 @@ export default function Hero() {
                     Projeto atualizado
                   </p>
                 </div>
-
               </div>
             </div>
 
-            {/* App */}
-            <div className="relative overflow-hidden rounded-[1.8rem] border border-slate-200 bg-white shadow-2xl shadow-slate-900/10">
-
-              {/* Browser */}
-              <div className="flex h-12 items-center gap-2 border-b border-slate-100 px-4">
-                <span className="h-2.5 w-2.5 rounded-full bg-slate-200" />
-                <span className="h-2.5 w-2.5 rounded-full bg-slate-200" />
-                <span className="h-2.5 w-2.5 rounded-full bg-slate-200" />
-
-                <div className="ml-3 flex h-7 flex-1 items-center rounded-md bg-slate-50 px-3 text-[10px] text-slate-400">
-                  app.nexuson.com
-                </div>
-              </div>
-
-              {/* App content */}
-              <div className="bg-slate-50 p-4 sm:p-6">
-
-                {/* App header */}
-                <div className="flex items-center justify-between">
-
-                  <div className="flex items-center gap-2.5">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-sm font-bold text-white">
-                      N
-                    </div>
-
-                    <div>
-                      <p className="text-[9px] text-slate-400">
-                        NexusOn
-                      </p>
-
-                      <p className="text-xs font-bold text-slate-900">
-                        Meu espaço
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="h-8 w-8 rounded-full bg-slate-200" />
-
-                </div>
-
-                {/* Greeting */}
-                <div className="mt-6">
-                  <p className="text-[10px] text-slate-400">
-                    Olá 👋
-                  </p>
-
-                  <h2 className="mt-1 text-base font-bold text-slate-900 sm:text-lg">
-                    No que estás a trabalhar?
-                  </h2>
-                </div>
-
-                {/* Search */}
-                <div className="mt-4 flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-3">
-                  <Search
-                    size={15}
-                    className="text-slate-400"
-                  />
-
-                  <span className="text-[10px] text-slate-400">
-                    Procurar projetos, TCCs, mentores...
-                  </span>
-                </div>
-
-                {/* Quick actions */}
-                <div className="mt-4 grid grid-cols-3 gap-2">
-
-                  <div className="rounded-xl bg-blue-600 p-3 text-white">
-                    <Lightbulb size={16} />
-
-                    <p className="mt-3 text-[9px] font-semibold">
-                      Nova ideia
-                    </p>
-                  </div>
-
-                  <div className="rounded-xl border border-slate-200 bg-white p-3">
-                    <Rocket
-                      size={16}
-                      className="text-blue-600"
-                    />
-
-                    <p className="mt-3 text-[9px] font-semibold text-slate-700">
-                      Projeto
-                    </p>
-                  </div>
-
-                  <div className="rounded-xl border border-slate-200 bg-white p-3">
-                    <Users
-                      size={16}
-                      className="text-blue-600"
-                    />
-
-                    <p className="mt-3 text-[9px] font-semibold text-slate-700">
-                      Mentor
-                    </p>
-                  </div>
-
-                </div>
-
-                {/* Project */}
-                <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-4">
-
-                  <div className="flex items-start justify-between gap-3">
-
-                    <div>
-                      <p className="text-[9px] font-bold uppercase tracking-wider text-blue-600">
-                        Projeto em desenvolvimento
-                      </p>
-
-                      <h3 className="mt-1 text-xs font-bold text-slate-900">
-                        Sistema de Gestão Académica
-                      </h3>
-                    </div>
-
-                    <ChevronRight
-                      size={16}
-                      className="text-slate-300"
-                    />
-
-                  </div>
-
-                  {/* Progress */}
-                  <div className="mt-4">
-
-                    <div className="mb-2 flex justify-between">
-                      <span className="text-[9px] text-slate-400">
-                        Progresso
-                      </span>
-
-                      <span className="text-[9px] font-bold text-blue-600">
-                        68%
-                      </span>
-                    </div>
-
-                    <div className="h-1.5 overflow-hidden rounded-full bg-slate-100">
-                      <div className="h-full w-[68%] rounded-full bg-blue-600" />
-                    </div>
-
-                  </div>
-
-                </div>
-
-                {/* Bottom cards */}
-                <div className="mt-3 grid grid-cols-2 gap-2">
-
-                  <div className="rounded-xl border border-slate-200 bg-white p-3">
-                    <p className="text-[9px] text-slate-400">
-                      Próxima mentoria
-                    </p>
-
-                    <p className="mt-1 text-[10px] font-bold text-slate-900">
-                      Sexta · 15:00
-                    </p>
-                  </div>
-
-                  <div className="rounded-xl border border-slate-200 bg-white p-3">
-                    <p className="text-[9px] text-slate-400">
-                      Tarefas
-                    </p>
-
-                    <p className="mt-1 text-[10px] font-bold text-green-600">
-                      8 concluídas
-                    </p>
-                  </div>
-
-                </div>
-
-              </div>
+            {/* Bolinha decorativa */}
+            <div className="absolute -right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-lg">
+              <div className="h-3 w-3 rounded-full bg-blue-600" />
             </div>
 
+            {/* Pequenos pontos */}
+            <div className="absolute bottom-20 right-1/2 h-3 w-3 rounded-full bg-blue-400" />
+            <div className="absolute left-8 top-8 h-2 w-2 rounded-full bg-blue-300" />
           </div>
         </div>
+      </div>
+
+      {/* Indicador inferior */}
+      <div className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 items-center gap-2 text-xs font-medium text-slate-400 sm:flex">
+        <span>Descobre o que podes construir</span>
+
+        <ArrowRight size={14} />
       </div>
     </section>
   );
