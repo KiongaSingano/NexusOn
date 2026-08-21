@@ -104,7 +104,7 @@ export default function Hero() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-600" />
               </span>
 
-              Da Ideia à Projeto. Do Projeto à Solução.
+              Da Ideia ao Projeto. Do Projeto à Solução.
             </div>
 
             {/* Título */}
