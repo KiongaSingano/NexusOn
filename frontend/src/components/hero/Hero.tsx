@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   ArrowRight,
   CheckCircle2,
@@ -130,29 +131,30 @@ export default function Hero() {
             </p>
 
             {/* Botões */}
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+<div className="mt-9 flex flex-col gap-3 sm:flex-row">
 
-              <a
-                href="#criar-conta"
-                className="group flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-xl shadow-blue-600/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-2xl"
-              >
-                Começar agora
+  <Link
+    to="/criar-conta"
+    className="group flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-xl shadow-blue-600/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-2xl"
+  >
+    Começar agora
 
-                <ArrowRight
-                  size={18}
-                  className="transition-transform duration-300 group-hover:translate-x-1"
-                />
-              </a>
+    <ArrowRight
+      size={18}
+      className="transition-transform duration-300 group-hover:translate-x-1"
+    />
+  </Link>
 
-              <a
-                href="#como-funciona"
-                className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 transition-all duration-300 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600"
-              >
-                <Play size={15} fill="currentColor" />
+  <Link
+    to="/como-funciona"
+    className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 transition-all duration-300 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600"
+  >
+    <Play size={15} fill="currentColor" />
 
-                Como funciona
-              </a>
-            </div>
+    Como funciona
+  </Link>
+
+</div>
 
             {/* Features */}
             <div className="mt-9 flex flex-wrap gap-x-6 gap-y-3">

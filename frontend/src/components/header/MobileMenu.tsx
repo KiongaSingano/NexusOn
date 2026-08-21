@@ -1,4 +1,6 @@
 import { ArrowRight, X } from "lucide-react";
+import { Link } from "react-router-dom";
+
 import Logo from "./Logo";
 import HeaderActions from "./HeaderActions";
 
@@ -10,15 +12,15 @@ interface MobileMenuProps {
 const navItems = [
   {
     label: "Início",
-    href: "#inicio",
+    to: "/",
   },
   {
     label: "Sobre nós",
-    href: "#sobre",
+    to: "/sobre",
   },
   {
     label: "Como funciona",
-    href: "#como-funciona",
+    to: "/como-funciona",
   },
 ];
 
@@ -29,10 +31,9 @@ export default function MobileMenu({
   return (
     <div
       className={`fixed inset-0 z-[60] lg:hidden ${
-        open
-          ? "pointer-events-auto"
-          : "pointer-events-none"
+        open ? "pointer-events-auto" : "pointer-events-none"
       }`}
+      aria-hidden={!open}
     >
       {/* Fundo */}
       <button
@@ -40,20 +41,18 @@ export default function MobileMenu({
         aria-label="Fechar menu"
         onClick={onClose}
         className={`absolute inset-0 bg-slate-950/40 backdrop-blur-sm transition-opacity duration-300 ${
-          open
-            ? "opacity-100"
-            : "opacity-0"
+          open ? "opacity-100" : "opacity-0"
         }`}
       />
 
-      {/* Menu */}
+      {/* Painel */}
       <aside
-        className={`absolute right-0 top-0 flex h-full w-[min(88%,390px)] flex-col bg-white px-6 pb-8 pt-6 shadow-2xl transition-transform duration-300 ${
-          open
-            ? "translate-x-0"
-            : "translate-x-full"
+        className={`absolute right-0 top-0 flex h-full w-[min(88%,390px)] flex-col bg-white px-5 pb-8 pt-5 shadow-2xl transition-transform duration-300 sm:px-6 ${
+          open ? "translate-x-0" : "translate-x-full"
         }`}
+        aria-label="Menu de navegação"
       >
+        {/* Cabeçalho */}
         <div className="flex items-center justify-between">
           <Logo />
 
@@ -61,27 +60,32 @@ export default function MobileMenu({
             type="button"
             onClick={onClose}
             aria-label="Fechar menu"
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 text-slate-600 transition hover:border-blue-200 hover:text-blue-600"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 text-slate-600 transition-all duration-200 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600 active:scale-95"
           >
             <X size={21} />
           </button>
         </div>
 
+        {/* Navegação */}
         <nav className="mt-10 space-y-1">
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.label}
-              href={item.href}
+              to={item.to}
               onClick={onClose}
-              className="flex items-center justify-between rounded-xl px-4 py-4 text-base font-semibold text-slate-700 transition hover:bg-blue-50 hover:text-blue-600"
+              className="group flex items-center justify-between rounded-xl px-4 py-4 text-base font-semibold text-slate-700 transition-all duration-200 hover:bg-blue-50 hover:text-blue-600 active:scale-[0.98]"
             >
-              {item.label}
+              <span>{item.label}</span>
 
-              <ArrowRight size={17} />
-            </a>
+              <ArrowRight
+                size={17}
+                className="transition-transform duration-200 group-hover:translate-x-1"
+              />
+            </Link>
           ))}
         </nav>
 
+        {/* Ações */}
         <div className="mt-8 border-t border-slate-100 pt-7">
           <HeaderActions
             mobile
@@ -89,8 +93,9 @@ export default function MobileMenu({
           />
         </div>
 
+        {/* Informação */}
         <div className="mt-auto rounded-2xl bg-blue-50 p-5">
-          <p className="font-bold text-slate-900">
+          <p className="font-bold tracking-tight text-slate-900">
             Nexus<span className="text-blue-600">On</span>
           </p>
 
