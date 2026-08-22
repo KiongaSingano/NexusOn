@@ -23,6 +23,10 @@ const navItems = [
     to: "/explorar",
   },
   {
+    label: "Comunidade",
+    to: "/comunidade",
+  },
+  {
     label: "Sobre Nós",
     to: "/sobre",
   },
@@ -41,28 +45,34 @@ export default function MobileMenu({
   return (
     <div
       className={`fixed inset-0 z-[60] lg:hidden ${
-        open ? "pointer-events-auto" : "pointer-events-none"
+        open
+          ? "pointer-events-auto"
+          : "pointer-events-none"
       }`}
       aria-hidden={!open}
     >
-      {/* Fundo */}
+      {/* FUNDO */}
       <button
         type="button"
         aria-label="Fechar menu"
         onClick={onClose}
         className={`absolute inset-0 bg-slate-950/40 backdrop-blur-md transition-opacity duration-300 ${
-          open ? "opacity-100" : "opacity-0"
+          open
+            ? "opacity-100"
+            : "opacity-0"
         }`}
       />
 
-      {/* Painel */}
+      {/* PAINEL */}
       <aside
         className={`absolute right-0 top-0 flex h-full w-[min(88%,390px)] flex-col overflow-y-auto border-l border-white/50 bg-white/90 px-5 pb-8 pt-5 shadow-2xl backdrop-blur-2xl transition-transform duration-300 sm:px-6 ${
-          open ? "translate-x-0" : "translate-x-full"
+          open
+            ? "translate-x-0"
+            : "translate-x-full"
         }`}
         aria-label="Menu de navegação"
       >
-        {/* Cabeçalho */}
+        {/* CABEÇALHO */}
         <div className="flex items-center justify-between">
           <Logo />
 
@@ -76,7 +86,7 @@ export default function MobileMenu({
           </button>
         </div>
 
-        {/* Navegação */}
+        {/* NAVEGAÇÃO */}
         <nav className="mt-8">
           <p className="mb-3 px-3 text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">
             Navegação
@@ -87,7 +97,9 @@ export default function MobileMenu({
               const active =
                 item.to === "/"
                   ? location.pathname === "/"
-                  : location.pathname.startsWith(item.to);
+                  : location.pathname.startsWith(
+                      item.to
+                    );
 
               return (
                 <Link
@@ -116,7 +128,7 @@ export default function MobileMenu({
           </div>
         </nav>
 
-        {/* Ações */}
+        {/* AÇÕES */}
         <div className="mt-7 border-t border-slate-200/70 pt-6">
           <HeaderActions
             mobile
@@ -124,7 +136,7 @@ export default function MobileMenu({
           />
         </div>
 
-        {/* Bloco NexusOn */}
+        {/* BLOCO NEXUSON */}
         <div className="relative mt-auto overflow-hidden rounded-3xl border border-blue-100 bg-gradient-to-br from-blue-50 to-white p-5">
           <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-blue-100/60 blur-2xl" />
 

@@ -14,6 +14,10 @@ const navItems = [
     to: "/explorar",
   },
   {
+    label: "Comunidade",
+    to: "/comunidade",
+  },
+  {
     label: "Sobre Nós",
     to: "/sobre",
   },
@@ -51,7 +55,7 @@ export default function DesktopNav() {
               {item.label}
             </span>
 
-            {/* Indicador */}
+            {/* Indicador da página ativa */}
             <span
               className={`absolute bottom-1 left-1/2 h-0.5 -translate-x-1/2 rounded-full bg-blue-600 transition-all duration-300 ${
                 active
