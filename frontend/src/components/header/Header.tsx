@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 import Logo from "./Logo";
 import DesktopNav from "./DesktopNav";
@@ -12,12 +12,12 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 12);
     };
 
-    window.addEventListener("scroll", handleScroll);
-
     handleScroll();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -25,52 +25,93 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    if (!mobileOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
     return () => {
-      document.body.style.overflow = "";
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
     };
   }, [mobileOpen]);
 
   return (
     <>
       <header
-        className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "border-b border-slate-200/70 bg-white/90 shadow-sm backdrop-blur-xl"
-            : "bg-white/95 backdrop-blur-sm"
+            ? "border-b border-slate-200/70 bg-white/85 shadow-lg shadow-slate-900/5 backdrop-blur-2xl"
+            : "bg-white/65 backdrop-blur-xl"
         }`}
       >
-        <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-
-          {/* Logo */}
-          <div className="shrink-0">
+        <div
+          className={`mx-auto flex w-full max-w-7xl items-center justify-between px-4 transition-all duration-300 sm:px-6 lg:px-8 ${
+            scrolled ? "h-16" : "h-[72px]"
+          }`}
+        >
+          {/* LOGO */}
+          <div className="shrink-0 transition-transform duration-300 hover:scale-[1.02]">
             <Logo />
           </div>
 
-          {/* Navegação Desktop */}
-          <DesktopNav />
+          {/* NAVEGAÇÃO DESKTOP */}
+          <nav className="hidden lg:flex">
+            <DesktopNav />
+          </nav>
 
-          {/* Ações Desktop */}
+          {/* AÇÕES DESKTOP */}
           <div className="hidden shrink-0 lg:block">
             <HeaderActions />
           </div>
 
-          {/* Menu Mobile */}
+          {/* BOTÃO MOBILE */}
           <button
             type="button"
-            onClick={() => setMobileOpen(true)}
-            aria-label="Abrir menu"
+            onClick={() => setMobileOpen((current) => !current)}
+            aria-label={
+              mobileOpen ? "Fechar menu" : "Abrir menu"
+            }
             aria-expanded={mobileOpen}
             aria-controls="mobile-navigation"
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm transition-all duration-200 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600 active:scale-95 lg:hidden"
+            className={`relative flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-200 lg:hidden ${
+              mobileOpen
+                ? "border-blue-200 bg-blue-50 text-blue-600"
+                : "border-slate-200/80 bg-white/70 text-slate-700 shadow-sm backdrop-blur-md hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600"
+            } active:scale-95`}
           >
-            <Menu size={22} />
+            <span
+              className={`absolute transition-all duration-200 ${
+                mobileOpen
+                  ? "rotate-0 scale-100 opacity-100"
+                  : "rotate-90 scale-50 opacity-0"
+              }`}
+            >
+              <X size={21} />
+            </span>
+
+            <span
+              className={`transition-all duration-200 ${
+                mobileOpen
+                  ? "-rotate-90 scale-50 opacity-0"
+                  : "rotate-0 scale-100 opacity-100"
+              }`}
+            >
+              <Menu size={21} />
+            </span>
           </button>
         </div>
       </header>
 
-      {/* Menu Mobile */}
+      {/* MENU MOBILE */}
       <div id="mobile-navigation">
         <MobileMenu
           open={mobileOpen}
