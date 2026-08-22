@@ -17,7 +17,7 @@ export default function AnnouncementBar({
           : "pointer-events-none -translate-y-full opacity-0"
       }`}
     >
-      <div className="relative mx-auto flex min-h-[40px] w-full max-w-7xl items-center justify-center px-10 py-2 sm:min-h-[40px] sm:px-12">
+      <div className="relative mx-auto flex min-h-[40px] w-full max-w-7xl items-center justify-center px-10 py-2 sm:px-12">
         <div className="flex items-center justify-center gap-2 text-center">
           <Rocket
             size={14}
@@ -25,11 +25,9 @@ export default function AnnouncementBar({
           />
 
           <p className="text-[11px] font-medium leading-4 text-slate-600 sm:text-xs">
-            Estamos a preparar o lançamento oficial da{" "}
-            <span className="font-bold text-blue-600">
-              NexusOn
-            </span>
-            . Em breve, novas funcionalidades estarão disponíveis.
+            A NexusOn está a ser construída. Estamos a desenvolver
+            novas funcionalidades para tornar a plataforma cada vez
+            mais útil e acessível.
           </p>
         </div>
 
