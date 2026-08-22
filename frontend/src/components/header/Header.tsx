@@ -6,7 +6,13 @@ import DesktopNav from "./DesktopNav";
 import HeaderActions from "./HeaderActions";
 import MobileMenu from "./MobileMenu";
 
-export default function Header() {
+interface HeaderProps {
+  announcementVisible?: boolean;
+}
+
+export default function Header({
+  announcementVisible = false,
+}: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -17,7 +23,9 @@ export default function Header() {
 
     handleScroll();
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -46,15 +54,20 @@ export default function Header() {
 
   return (
     <>
+      {/* HEADER */}
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        className={`fixed inset-x-0 z-50 transition-[top,background-color,border-color,box-shadow] duration-300 ${
+          announcementVisible
+            ? "top-9 sm:top-9"
+            : "top-0"
+        } ${
           scrolled
             ? "border-b border-slate-200/70 bg-white/85 shadow-lg shadow-slate-900/5 backdrop-blur-2xl"
             : "bg-white/65 backdrop-blur-xl"
         }`}
       >
         <div
-          className={`mx-auto flex w-full max-w-7xl items-center justify-between px-4 transition-all duration-300 sm:px-6 lg:px-8 ${
+          className={`mx-auto flex w-full max-w-7xl items-center justify-between px-4 transition-[height] duration-300 sm:px-6 lg:px-8 ${
             scrolled ? "h-16" : "h-[72px]"
           }`}
         >
@@ -64,9 +77,9 @@ export default function Header() {
           </div>
 
           {/* NAVEGAÇÃO DESKTOP */}
-          <nav className="hidden lg:flex">
+          <div className="hidden lg:block">
             <DesktopNav />
-          </nav>
+          </div>
 
           {/* AÇÕES DESKTOP */}
           <div className="hidden shrink-0 lg:block">
@@ -76,9 +89,13 @@ export default function Header() {
           {/* BOTÃO MOBILE */}
           <button
             type="button"
-            onClick={() => setMobileOpen((current) => !current)}
+            onClick={() =>
+              setMobileOpen((current) => !current)
+            }
             aria-label={
-              mobileOpen ? "Fechar menu" : "Abrir menu"
+              mobileOpen
+                ? "Fechar menu"
+                : "Abrir menu"
             }
             aria-expanded={mobileOpen}
             aria-controls="mobile-navigation"
@@ -88,6 +105,7 @@ export default function Header() {
                 : "border-slate-200/80 bg-white/70 text-slate-700 shadow-sm backdrop-blur-md hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600"
             } active:scale-95`}
           >
+            {/* Ícone X */}
             <span
               className={`absolute transition-all duration-200 ${
                 mobileOpen
@@ -98,6 +116,7 @@ export default function Header() {
               <X size={21} />
             </span>
 
+            {/* Ícone Menu */}
             <span
               className={`transition-all duration-200 ${
                 mobileOpen

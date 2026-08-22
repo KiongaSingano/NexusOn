@@ -12,7 +12,6 @@ export default function App() {
         <Route path="/entrar" element={<Login />} />
         <Route path="/criar-conta" element={<Register />} />
       </Routes>
-
     </BrowserRouter>
   );
 }
