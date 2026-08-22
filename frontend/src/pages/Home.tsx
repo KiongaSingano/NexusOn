@@ -3,7 +3,7 @@ import Hero from "../components/hero/Hero";
 import Statistics from "../components/statistics/Statistics";
 import Team from "../components/team/Team";
 import Footer from "../components/footer/Footer";
-
+import ChatAssistant from "../components/chatbot/ChatAssistant";
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
@@ -18,6 +18,7 @@ export default function Home() {
       </main>
 
       <Footer />
+       <ChatAssistant />
     </div>
   );
 }
