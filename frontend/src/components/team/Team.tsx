@@ -6,8 +6,8 @@ import {
   Users,
 } from "lucide-react";
 
-import madalenaPhoto from "../../assets/team/madalena.jpeg";
-import zacariasPhoto from "../../assets/team/zacarias.png";
+import madalenaPhoto from "../../assets/team/Madalena.jpeg";
+import zacariasPhoto from "../../assets/team/Zacarias.png";
 
 const team = [
   {
