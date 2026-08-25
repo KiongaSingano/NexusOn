@@ -58,7 +58,7 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="relative min-h-screen overflow-hidden bg-slate-50"
+      className="relative min-h-[calc(100vh-72px)] overflow-hidden bg-slate-50"
     >
       {/* ================================================= */}
       {/* BACKGROUND */}
@@ -88,7 +88,7 @@ export default function Hero() {
       {/* CONTEÚDO */}
       {/* ================================================= */}
 
-      <div className="relative mx-auto flex min-h-screen max-w-7xl items-center px-5 pb-16 pt-28 sm:px-6 lg:px-8 lg:pt-24">
+<div className="relative mx-auto flex min-h-screen max-w-7xl items-center px-4 pb-12 pt-24 sm:px-6 sm:pb-16 sm:pt-24 md:pt-24 lg:px-8 lg:pb-20 lg:pt-20 xl:pt-16">
         <div className="grid w-full items-center gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12">
 
           {/* ================================================= */}
