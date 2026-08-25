@@ -10,7 +10,7 @@ import {
   Users,
 } from "lucide-react";
 
-import studentsTech from "../../assets/hero/students-tech.jpg";
+import studentsTech from "../../assets/hero/students-tech.jpeg";
 import studentsProject from "../../assets/hero/students-project.jpg";
 import studentsPresentation from "../../assets/hero/students-presentation.jpg";
 

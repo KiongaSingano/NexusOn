@@ -158,9 +158,7 @@ export default function Team() {
 
               <div className="flex flex-1 flex-col p-3 sm:p-4">
 
-                <p className="text-[10px] font-semibold text-slate-900 sm:text-xs">
-                  {member.education}
-                </p>
+              
 
                 <p className="mt-1.5 text-[10px] leading-4 text-slate-500 sm:mt-2 sm:text-xs sm:leading-5">
                   {member.description}
