@@ -1,49 +1,42 @@
 import { useState } from "react";
 
-import AnnouncementBar from "../components/announcement/AnnouncementBar";
 import Header from "../components/header/Header";
 import Hero from "../components/hero/Hero";
 import Statistics from "../components/statistics/Statistics";
 import Team from "../components/team/Team";
+import FAQ from "../components/faq/FAQ";
 import Footer from "../components/footer/Footer";
 import ChatAssistant from "../components/chatbot/ChatAssistant";
 
 export default function Home() {
-  const [announcementVisible, setAnnouncementVisible] =
-    useState(true);
+  const [chatOpen, setChatOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-white">
 
-      {/* AVISO */}
-      <AnnouncementBar
-        visible={announcementVisible}
-        onClose={() => setAnnouncementVisible(false)}
-      />
+      <Header />
 
-      {/* HEADER */}
-      <Header
-        announcementVisible={announcementVisible}
-      />
-
-      {/* CONTEÚDO */}
-      <main
-        className={`transition-[padding] duration-300 ${
-          announcementVisible
-            ? "pt-[112px]"
-            : "pt-[72px]"
-        }`}
-      >
+      <main>
         <Hero />
 
         <Statistics />
 
         <Team />
+
+        <FAQ
+          chatOpen={chatOpen}
+          onToggleChat={() =>
+            setChatOpen((current) => !current)
+          }
+        />
       </main>
 
       <Footer />
 
-      <ChatAssistant />
+      <ChatAssistant
+        open={chatOpen}
+        onOpenChange={setChatOpen}
+      />
 
     </div>
   );

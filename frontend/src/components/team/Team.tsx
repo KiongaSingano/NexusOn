@@ -12,7 +12,7 @@ import zacariasPhoto from "../../assets/team/Zacarias.png";
 const team = [
   {
     name: "Madalena Ferreira",
-    role: "Comunicação & Representação",
+    role: "Comunicação & Marketing",
     education: "Estudante de Língua Portuguesa",
     description:
       "Responsável pela comunicação e representação do projeto, contribuindo para a ligação entre a NexusOn, utilizadores e parceiros.",
@@ -158,7 +158,7 @@ export default function Team() {
 
               <div className="flex flex-1 flex-col p-3 sm:p-4">
 
-              
+
 
                 <p className="mt-1.5 text-[10px] leading-4 text-slate-500 sm:mt-2 sm:text-xs sm:leading-5">
                   {member.description}

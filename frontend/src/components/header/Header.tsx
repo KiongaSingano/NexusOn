@@ -6,137 +6,94 @@ import DesktopNav from "./DesktopNav";
 import HeaderActions from "./HeaderActions";
 import MobileMenu from "./MobileMenu";
 
-interface HeaderProps {
-  announcementVisible?: boolean;
-}
+import { useAnnouncement } from "../../context/AnnouncementContext";
 
-export default function Header({
-  announcementVisible = false,
-}: HeaderProps) {
+export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const { announcementVisible } = useAnnouncement();
+
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 12);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 20);
 
     handleScroll();
-
     window.addEventListener("scroll", handleScroll, {
       passive: true,
     });
 
-    return () => {
+    return () =>
       window.removeEventListener("scroll", handleScroll);
-    };
   }, []);
 
   useEffect(() => {
     if (!mobileOpen) return;
 
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setMobileOpen(false);
-      }
+    const closeOnEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
     };
 
-    document.addEventListener("keydown", handleKeyDown);
-
-    const previousOverflow = document.body.style.overflow;
+    const overflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
+    document.addEventListener("keydown", closeOnEscape);
+
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", closeOnEscape);
+      document.body.style.overflow = overflow;
     };
   }, [mobileOpen]);
 
   return (
     <>
-      {/* HEADER */}
       <header
-        className={`fixed inset-x-0 z-50 transition-[top,background-color,border-color,box-shadow] duration-300 ${
-          announcementVisible
-            ? "top-9 sm:top-9"
-            : "top-0"
-        } ${
-          scrolled
-            ? "border-b border-slate-200/70 bg-white/85 shadow-lg shadow-slate-900/5 backdrop-blur-2xl"
-            : "bg-white/65 backdrop-blur-xl"
-        }`}
+        className={`
+          fixed inset-x-0 z-[110]
+          ${announcementVisible ? "top-10" : "top-0"}
+          border-b
+          ${
+            scrolled
+              ? "border-slate-200/80 bg-white/90 shadow-[0_8px_30px_rgba(15,23,42,0.07)]"
+              : "border-transparent bg-white/70"
+          }
+          backdrop-blur-xl
+          transition-all duration-300
+        `}
       >
         <div
-          className={`mx-auto flex w-full max-w-7xl items-center justify-between px-4 transition-[height] duration-300 sm:px-6 lg:px-8 ${
-            scrolled ? "h-16" : "h-[72px]"
-          }`}
+          className={`
+            mx-auto flex max-w-7xl items-center justify-between
+            px-4 sm:px-6 lg:px-8
+            ${scrolled ? "h-16" : "h-[76px]"}
+            transition-all duration-300
+          `}
         >
-          {/* LOGO */}
-          <div className="shrink-0 transition-transform duration-300 hover:scale-[1.02]">
-            <Logo />
-          </div>
+          <Logo />
 
-          {/* NAVEGAÇÃO DESKTOP */}
-          <div className="hidden lg:block">
+          <div className="hidden flex-1 justify-center lg:flex">
             <DesktopNav />
           </div>
 
-          {/* AÇÕES DESKTOP */}
-          <div className="hidden shrink-0 lg:block">
+          <div className="hidden lg:block">
             <HeaderActions />
           </div>
 
-          {/* BOTÃO MOBILE */}
           <button
             type="button"
-            onClick={() =>
-              setMobileOpen((current) => !current)
-            }
-            aria-label={
-              mobileOpen
-                ? "Fechar menu"
-                : "Abrir menu"
-            }
+            onClick={() => setMobileOpen((open) => !open)}
+            aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
             aria-expanded={mobileOpen}
-            aria-controls="mobile-navigation"
-            className={`relative flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-200 lg:hidden ${
-              mobileOpen
-                ? "border-blue-200 bg-blue-50 text-blue-600"
-                : "border-slate-200/80 bg-white/70 text-slate-700 shadow-sm backdrop-blur-md hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600"
-            } active:scale-95`}
+            className="relative z-[120] flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white/80 text-slate-700 shadow-sm lg:hidden"
           >
-            {/* Ícone X */}
-            <span
-              className={`absolute transition-all duration-200 ${
-                mobileOpen
-                  ? "rotate-0 scale-100 opacity-100"
-                  : "rotate-90 scale-50 opacity-0"
-              }`}
-            >
-              <X size={21} />
-            </span>
-
-            {/* Ícone Menu */}
-            <span
-              className={`transition-all duration-200 ${
-                mobileOpen
-                  ? "-rotate-90 scale-50 opacity-0"
-                  : "rotate-0 scale-100 opacity-100"
-              }`}
-            >
-              <Menu size={21} />
-            </span>
+            {mobileOpen ? <X size={21} /> : <Menu size={21} />}
           </button>
         </div>
       </header>
 
-      {/* MENU MOBILE */}
-      <div id="mobile-navigation">
-        <MobileMenu
-          open={mobileOpen}
-          onClose={() => setMobileOpen(false)}
-        />
-      </div>
+      <MobileMenu
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+      />
     </>
   );
 }

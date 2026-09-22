@@ -48,6 +48,7 @@ export default function Hero() {
         setWordIndex(
           (current) => (current + 1) % rotatingWords.length
         );
+
         setVisible(true);
       }, 250);
     }, 3000);
@@ -58,7 +59,7 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="relative min-h-[calc(100vh-72px)] overflow-hidden bg-slate-50"
+      className="relative min-h-screen overflow-hidden bg-slate-50"
     >
       {/* ================================================= */}
       {/* BACKGROUND */}
@@ -88,19 +89,18 @@ export default function Hero() {
       {/* CONTEÚDO */}
       {/* ================================================= */}
 
-<div className="relative mx-auto flex min-h-screen max-w-7xl items-center px-4 pb-12 pt-24 sm:px-6 sm:pb-16 sm:pt-24 md:pt-24 lg:px-8 lg:pb-20 lg:pt-20 xl:pt-16">
+      <div className="relative mx-auto flex min-h-screen max-w-7xl items-center px-4 pb-12 pt-32 sm:px-6 sm:pb-16 sm:pt-32 md:pt-32 lg:px-8 lg:pb-20 lg:pt-28 xl:pt-24">
         <div className="grid w-full items-center gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12">
-
           {/* ================================================= */}
           {/* TEXTO */}
           {/* ================================================= */}
 
           <div className="relative z-10 max-w-2xl">
-
             {/* Badge */}
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white/80 px-3.5 py-2 text-xs font-semibold text-blue-700 shadow-sm backdrop-blur sm:text-sm">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-500 opacity-60" />
+
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-600" />
               </span>
 
@@ -145,7 +145,6 @@ export default function Hero() {
 
             {/* Botões */}
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-
               <Link
                 to="/criar-conta"
                 className="group flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-xl shadow-blue-600/20 transition-all duration-300 hover:-translate-y-1 hover:bg-blue-700 hover:shadow-2xl"
@@ -162,7 +161,10 @@ export default function Hero() {
                 to="/como-funciona"
                 className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white/80 px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600"
               >
-                <Play size={15} fill="currentColor" />
+                <Play
+                  size={15}
+                  fill="currentColor"
+                />
 
                 Como funciona
               </Link>
@@ -215,9 +217,8 @@ export default function Hero() {
           {/* ================================================= */}
 
           <div className="relative mx-auto h-[520px] w-full max-w-[600px] sm:h-[600px]">
-
             {/* Forma azul de fundo */}
-            <div className="absolute right-4 top-12 h-[420px] w-[420px] rounded-[4rem] bg-blue-600/10 rotate-6 blur-sm" />
+            <div className="absolute right-4 top-12 h-[420px] w-[420px] rotate-6 rounded-[4rem] bg-blue-600/10 blur-sm" />
 
             <div className="absolute right-8 top-20 h-[400px] w-[400px] rounded-[4rem] bg-blue-600" />
 
@@ -325,6 +326,7 @@ export default function Hero() {
 
             {/* Pequenos pontos */}
             <div className="absolute bottom-20 right-1/2 h-3 w-3 rounded-full bg-blue-400" />
+
             <div className="absolute left-8 top-8 h-2 w-2 rounded-full bg-blue-300" />
           </div>
         </div>

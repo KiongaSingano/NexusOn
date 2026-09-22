@@ -1,9 +1,41 @@
-import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import type { MouseEvent } from "react";
 
 export default function Logo() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogoClick = (
+    event: MouseEvent<HTMLAnchorElement>
+  ) => {
+    event.preventDefault();
+
+    // Se já estiver na página inicial, volta ao topo
+    if (location.pathname === "/") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+
+      return;
+    }
+
+    // Se estiver noutra página, vai para a página inicial
+    navigate("/");
+
+    // Depois de carregar a Home, vai para o topo
+    window.setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }, 100);
+  };
+
   return (
-    <Link
-      to="/"
+    <a
+      href="/"
+      onClick={handleLogoClick}
       className="group inline-flex items-center gap-2"
       aria-label="NexusOn - Página inicial"
     >
@@ -24,6 +56,6 @@ export default function Logo() {
         Nexus
         <span className="text-blue-600">On</span>
       </span>
-    </Link>
+    </a>
   );
 }
