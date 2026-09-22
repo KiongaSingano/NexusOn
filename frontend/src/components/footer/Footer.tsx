@@ -12,6 +12,7 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import type { IconType } from "react-icons";
 
 import Logo from "../header/Logo";
 
@@ -20,7 +21,7 @@ const platformLinks = [
   ["Oportunidades", "/oportunidades"],
   ["Comunidades", "/comunidades"],
   ["Contactos", "/contactos"],
-  ["FAQ", "/faq"],
+  ["FAQ", "/#faq"],
 ];
 
 const resourceLinks = [
@@ -29,11 +30,16 @@ const resourceLinks = [
   ["Acompanhamento", "#acompanhamento"],
 ];
 
-const socials = [
+const socials: [string, string, IconType, string][] = [
   ["Facebook", "#", FaFacebookF, "hover:bg-blue-600"],
   ["Instagram", "#", FaInstagram, "hover:bg-pink-600"],
   ["LinkedIn", "#", FaLinkedinIn, "hover:bg-blue-600"],
-  ["WhatsApp", "https://wa.me/244946614043", FaWhatsapp, "hover:bg-green-600"],
+  [
+    "WhatsApp",
+    "https://wa.me/244946614043",
+    FaWhatsapp,
+    "hover:bg-green-600",
+  ],
 ];
 
 const linkClass =
@@ -45,13 +51,9 @@ const arrowClass =
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-[#071A33] text-white">
-
-      {/* FUNDO */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -right-32 -top-32 h-80 w-80 rounded-full bg-blue-500/10 blur-3xl" />
-
         <div className="absolute -bottom-40 -left-32 h-96 w-96 rounded-full bg-blue-600/10 blur-3xl" />
-
         <div
           className="absolute inset-0 opacity-[0.035]"
           style={{
@@ -62,11 +64,9 @@ export default function Footer() {
         />
       </div>
 
-      {/* CONTEÚDO */}
       <div className="relative mx-auto max-w-7xl px-5 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1.4fr]">
 
-          {/* MARCA */}
           <div>
             <div className="[&_span]:text-white [&_span_span]:text-blue-400">
               <Logo />
@@ -93,7 +93,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* PLATAFORMA */}
           <div>
             <h3 className="text-xs font-bold uppercase tracking-[0.14em]">
               Plataforma
@@ -104,17 +103,13 @@ export default function Footer() {
                 <li key={label}>
                   <Link to={to} className={linkClass}>
                     {label}
-                    <ArrowUpRight
-                      size={13}
-                      className={arrowClass}
-                    />
+                    <ArrowUpRight size={13} className={arrowClass} />
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* RECURSOS */}
           <div>
             <h3 className="text-xs font-bold uppercase tracking-[0.14em]">
               Recursos
@@ -125,81 +120,45 @@ export default function Footer() {
                 <li key={label}>
                   <a href={href} className={linkClass}>
                     {label}
-                    <ArrowUpRight
-                      size={13}
-                      className={arrowClass}
-                    />
+                    <ArrowUpRight size={13} className={arrowClass} />
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* CONTACTOS */}
           <div>
             <h3 className="text-xs font-bold uppercase tracking-[0.14em]">
               Contactos
             </h3>
 
             <div className="mt-5 space-y-4">
-
-              {/* TELEFONE */}
-              <a
-                href="tel:+244946614043"
-                className={linkClass}
-              >
-                <Phone
-                  size={16}
-                  className="shrink-0 text-blue-400"
-                />
-
+              <a href="tel:+244946614043" className={linkClass}>
+                <Phone size={16} className="shrink-0 text-blue-400" />
                 <span>+244 946 614 043</span>
-
-                <ArrowUpRight
-                  size={13}
-                  className={arrowClass}
-                />
+                <ArrowUpRight size={13} className={arrowClass} />
               </a>
 
-              {/* EMAIL */}
               <a
                 href="mailto:apoio.nexuson@outlook.com"
                 className={linkClass}
               >
-                <Mail
-                  size={16}
-                  className="shrink-0 text-blue-400"
-                />
-
+                <Mail size={16} className="shrink-0 text-blue-400" />
                 <span>apoio.nexuson@outlook.com</span>
-
-                <ArrowUpRight
-                  size={13}
-                  className={arrowClass}
-                />
+                <ArrowUpRight size={13} className={arrowClass} />
               </a>
 
-              {/* CABINDA */}
               <a
                 href="https://www.google.com/maps/search/?api=1&query=1%C2%BA+de+Maio%2C+Cabinda%2C+Angola"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={linkClass}
               >
-                <MapPin
-                  size={16}
-                  className="shrink-0 text-blue-400"
-                />
-
+                <MapPin size={16} className="shrink-0 text-blue-400" />
                 <span>1º de Maio, Cabinda</span>
-
-                <ArrowUpRight
-                  size={13}
-                  className={arrowClass}
-                />
+                <ArrowUpRight size={13} className={arrowClass} />
               </a>
 
-              {/* HUAMBO */}
               <a
                 href="https://www.google.com/maps/search/?api=1&query=F%C3%A1tima+Urbano%2C+Largo+Wassanjuca%2C+Huambo%2C+Angola"
                 target="_blank"
@@ -210,26 +169,21 @@ export default function Footer() {
                   size={16}
                   className="mt-0.5 shrink-0 text-blue-400"
                 />
-
                 <span className="break-words">
                   Fátima Urbano, Largo Wassanjuca, Huambo
                 </span>
-
                 <ArrowUpRight
                   size={13}
                   className={`${arrowClass} mt-0.5`}
                 />
               </a>
-
             </div>
           </div>
         </div>
       </div>
 
-      {/* BARRA INFERIOR */}
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-4 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
-
           <p className="text-xs leading-5 text-slate-500">
             © {new Date().getFullYear()} Grupo Ngana · NexusOn.
             Todos os direitos reservados.
@@ -253,10 +207,7 @@ export default function Footer() {
             <button
               type="button"
               onClick={() =>
-                window.scrollTo({
-                  top: 0,
-                  behavior: "smooth",
-                })
+                window.scrollTo({ top: 0, behavior: "smooth" })
               }
               aria-label="Voltar ao topo"
               className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-slate-400 transition-all duration-150 hover:-translate-y-0.5 hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-blue-400"
@@ -264,10 +215,8 @@ export default function Footer() {
               <ArrowUp size={14} />
             </button>
           </div>
-
         </div>
       </div>
-
     </footer>
   );
 }

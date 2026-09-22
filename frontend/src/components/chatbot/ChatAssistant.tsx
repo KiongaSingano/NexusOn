@@ -7,7 +7,7 @@ interface Props {
 }
 
 const phone = "946614043";
-const whatsapp = "244946614043";
+const whatsappNumber = "244946614043";
 
 const options = [
   ["Tenho uma ideia 💡", "Olá! Tenho uma ideia e gostaria de saber como a NexusOn pode ajudar-me a desenvolvê-la."],
@@ -69,7 +69,7 @@ export default function ChatAssistant({ open: externalOpen, onOpenChange }: Prop
                 </div>
               </div>
 
-              <button onClick={toggle}>
+              <button onClick={toggle} aria-label="Fechar">
                 <X size={19} />
               </button>
             </div>
@@ -128,16 +128,15 @@ export default function ChatAssistant({ open: externalOpen, onOpenChange }: Prop
           {chooser && (
             <div className="absolute inset-0 flex items-center justify-center bg-slate-950/30 p-5 backdrop-blur-sm">
               <div className="w-full max-w-[300px] rounded-2xl bg-white p-4 shadow-2xl">
-                <div className="mb-4">
-                  <h3 className="text-sm font-bold text-slate-900">
-                    Como deseja enviar?
-                  </h3>
-                  <p className="mt-1 text-xs text-slate-500">
-                    Escolha uma aplicação disponível no seu dispositivo.
-                  </p>
-                </div>
+                <h3 className="text-sm font-bold text-slate-900">
+                  Como deseja enviar?
+                </h3>
 
-                <div className="grid gap-2">
+                <p className="mt-1 text-xs text-slate-500">
+                  Escolha uma aplicação disponível no seu dispositivo.
+                </p>
+
+                <div className="mt-4 grid gap-2">
                   <button
                     onClick={whatsapp}
                     className="rounded-xl bg-green-500 px-4 py-3 text-sm font-semibold text-white hover:bg-green-600"
@@ -154,7 +153,7 @@ export default function ChatAssistant({ open: externalOpen, onOpenChange }: Prop
 
                   <button
                     onClick={() => setChooser(false)}
-                    className="py-2 text-xs text-slate-400 hover:text-slate-600"
+                    className="py-2 text-xs text-slate-400"
                   >
                     Cancelar
                   </button>
