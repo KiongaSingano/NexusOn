@@ -38,7 +38,7 @@ export default function ChatAssistant({ open: externalOpen, onOpenChange }: Prop
 
   const whatsapp = () => {
     window.open(
-      `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`,
+      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
       "_blank"
     );
     setChooser(false);
