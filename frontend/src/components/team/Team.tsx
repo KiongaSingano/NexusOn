@@ -3,7 +3,7 @@ import {
   Building2,
   Handshake,
   Mail,
-  Users,
+  UsersRound,
 } from "lucide-react";
 
 import madalenaPhoto from "../../assets/team/Madalena.jpeg";
@@ -15,7 +15,7 @@ const team = [
     role: "Comunicação & Marketing",
     education: "Estudante de Língua Portuguesa",
     description:
-      "Responsável pela comunicação e representação do projeto, contribuindo para a ligação entre a NexusOn, utilizadores e parceiros.",
+      "Responsável pela comunicação, representação e ligação do NexusOn com utilizadores e parceiros.",
     image: madalenaPhoto,
     position: "center 55%",
     tags: ["Comunicação", "Representação"],
@@ -25,268 +25,159 @@ const team = [
     role: "Tecnologia & Gestão",
     education: "Estudante de Ciências da Computação",
     description:
-      "Responsável pelo desenvolvimento tecnológico, programação, design e gestão dos projetos da NexusOn.",
+      "Responsável pela tecnologia, programação, design e gestão dos projetos do NexusOn.",
     image: zacariasPhoto,
     position: "center 55%",
-    tags: ["Desenvolvimento", "Programação", "Design", "Gestão"],
+    tags: ["Tecnologia", "Programação", "Gestão"],
   },
 ];
 
+const whatsapp = (message: string) => {
+  window.open(
+    `https://wa.me/244946614043?text=${encodeURIComponent(message)}`,
+    "_blank",
+    "noopener,noreferrer",
+  );
+};
+
 export default function Team() {
-  const contactPartner = () => {
-    const message = encodeURIComponent(
-      "Olá! Tenho interesse em ser parceiro da NexusOn. Gostaria de saber mais sobre as oportunidades de parceria."
-    );
-
-    window.open(
-      `https://wa.me/244946614043?text=${message}`,
-      "_blank",
-      "noopener,noreferrer"
-    );
-  };
-
-  const contactMember = (name: string) => {
-    const message = encodeURIComponent(
-      `Olá! Gostaria de entrar em contacto com ${name} através da NexusOn.`
-    );
-
-    window.open(
-      `https://wa.me/244946614043?text=${message}`,
-      "_blank",
-      "noopener,noreferrer"
-    );
-  };
-
   return (
-    <section
-      id="equipa"
-      className="relative overflow-hidden bg-slate-50 pt-3 pb-10 sm:pt-5 sm:pb-14"
-    >
-      {/* DECORAÇÃO DE FUNDO */}
+    <section id="equipa" className="bg-slate-50 py-16 sm:py-20">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
 
-      <div className="pointer-events-none absolute -left-32 top-10 h-56 w-56 rounded-full bg-blue-100/50 blur-3xl sm:h-72 sm:w-72" />
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-600">
+            A equipa
+          </span>
 
-      <div className="pointer-events-none absolute -right-32 bottom-0 h-56 w-56 rounded-full bg-blue-100/40 blur-3xl sm:h-72 sm:w-72" />
-
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-
-        {/* ========================= */}
-        {/* CABEÇALHO */}
-        {/* ========================= */}
-
-        <div className="mx-auto max-w-3xl text-center">
-
-          <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
-            A nossa{" "}
-            <span className="text-blue-600">equipa</span>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+            Pessoas por trás do NexusOn.
           </h2>
 
-          <p className="mx-auto mt-2 max-w-2xl text-xs leading-5 text-slate-500 sm:mt-3 sm:text-base sm:leading-6">
-            Pessoas com diferentes competências, unidas pela mesma visão:
-            transformar ideias, conhecimento e colaboração em projetos reais.
+          <p className="mt-3 text-sm leading-6 text-slate-500 sm:text-base">
+            Diferentes competências, uma mesma visão: transformar
+            ideias e conhecimento em projetos reais.
           </p>
-
         </div>
 
-        {/* ========================= */}
-        {/* CARDS */}
-        {/* ========================= */}
-
-        <div className="mx-auto mt-6 grid max-w-5xl items-stretch gap-3 sm:mt-8 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-
-          {/* ================================= */}
-          {/* MEMBROS DA EQUIPA */}
-          {/* ================================= */}
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
 
           {team.map((member) => (
             <article
               key={member.name}
-              className="group flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-900/10 sm:rounded-2xl"
+              className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-900/10"
             >
-
-              {/* FOTO */}
-
-              <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden bg-slate-200">
-
+              <div className="relative aspect-[4/3] overflow-hidden bg-slate-200">
                 <img
                   src={member.image}
                   alt={`Foto de ${member.name}`}
                   loading="lazy"
-                  style={{
-                    objectPosition: member.position,
-                  }}
-                  className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                  style={{ objectPosition: member.position }}
+                  className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                 />
 
-                {/* GRADIENTE */}
-
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/10 to-transparent" />
-
-                {/* BOTÃO CONTACTAR */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-transparent" />
 
                 <button
                   type="button"
-                  onClick={() => contactMember(member.name)}
                   aria-label={`Contactar ${member.name}`}
-                  className="absolute right-2.5 top-2.5 flex h-7 w-7 items-center justify-center rounded-full border border-white/20 bg-black/20 text-white backdrop-blur-md transition-all duration-200 hover:scale-110 hover:bg-white hover:text-blue-600 sm:right-3 sm:top-3 sm:h-8 sm:w-8"
+                  onClick={() =>
+                    whatsapp(
+                      `Olá! Gostaria de entrar em contacto com ${member.name} através do NexusOn.`,
+                    )
+                  }
+                  className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-black/20 text-white backdrop-blur-md transition hover:scale-110 hover:bg-white hover:text-blue-600"
                 >
-                  <Mail
-                    size={12}
-                    className="sm:h-3.5 sm:w-3.5"
-                  />
+                  <Mail size={14} />
                 </button>
 
-                {/* NOME */}
-
-                <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4">
-
-                  <p className="text-[8px] font-bold uppercase tracking-wider text-blue-300 sm:text-[10px]">
+                <div className="absolute bottom-4 left-4 right-4">
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-blue-300">
                     {member.role}
                   </p>
 
-                  <h3 className="mt-0.5 text-base font-bold text-white sm:mt-1 sm:text-xl">
+                  <h3 className="mt-1 text-xl font-bold text-white">
                     {member.name}
                   </h3>
-
                 </div>
-
               </div>
 
-              {/* ========================= */}
-              {/* CONTEÚDO */}
-              {/* ========================= */}
+              <div className="p-5">
+                <p className="text-xs font-medium text-slate-400">
+                  {member.education}
+                </p>
 
-              <div className="flex flex-1 flex-col p-3 sm:p-4">
-
-
-
-                <p className="mt-1.5 text-[10px] leading-4 text-slate-500 sm:mt-2 sm:text-xs sm:leading-5">
+                <p className="mt-3 text-sm leading-6 text-slate-600">
                   {member.description}
                 </p>
 
-                {/* TAGS */}
-
-                <div className="mt-2.5 flex flex-wrap gap-1 sm:mt-3 sm:gap-1.5">
-
+                <div className="mt-4 flex flex-wrap gap-1.5">
                   {member.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-[8px] font-medium text-slate-500 transition-colors duration-300 group-hover:border-blue-100 group-hover:bg-blue-50 group-hover:text-blue-600 sm:px-2.5 sm:py-1 sm:text-[10px]"
+                      className="rounded-full bg-slate-50 px-2.5 py-1 text-[10px] font-medium text-slate-500 transition group-hover:bg-blue-50 group-hover:text-blue-600"
                     >
                       {tag}
                     </span>
                   ))}
-
                 </div>
-
               </div>
-
             </article>
           ))}
 
-          {/* ================================= */}
-          {/* CARD PARCEIROS */}
-          {/* ================================= */}
+          <article className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-blue-100 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-900/10">
 
-          <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-blue-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-900/10 sm:rounded-2xl">
+            <div className="relative flex min-h-[220px] items-center justify-center overflow-hidden bg-gradient-to-br from-blue-600 to-blue-900">
 
-            {/* ÁREA VISUAL */}
+              <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-white/10" />
+              <div className="absolute -bottom-16 -left-16 h-40 w-40 rounded-full bg-white/10" />
 
-            <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900">
-
-              {/* DECORAÇÕES */}
-
-              <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-white/10 sm:h-40 sm:w-40" />
-
-              <div className="absolute -bottom-12 -left-8 h-28 w-28 rounded-full bg-white/10 sm:h-40 sm:w-40" />
-
-              {/* ÍCONE PRINCIPAL */}
-
-              <div className="absolute inset-0 flex items-center justify-center">
-
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-xl backdrop-blur-md transition-transform duration-500 group-hover:scale-110 sm:h-20 sm:w-20 sm:rounded-3xl">
-
-                  <Handshake
-                    size={30}
-                    strokeWidth={1.6}
-                    className="sm:h-[38px] sm:w-[38px]"
-                  />
-
-                </div>
-
+              <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-xl backdrop-blur-md transition duration-500 group-hover:scale-110">
+                <Handshake size={36} strokeWidth={1.6} />
               </div>
 
-              {/* ÍCONES SECUNDÁRIOS */}
+              <Building2
+                size={18}
+                className="absolute left-5 top-5 text-white/70"
+              />
 
-              <div className="absolute left-3 top-3 flex h-7 w-7 items-center justify-center rounded-lg bg-white/10 text-white backdrop-blur sm:left-5 sm:top-5 sm:h-9 sm:w-9 sm:rounded-xl">
-
-                <Building2
-                  size={14}
-                  className="sm:h-[17px] sm:w-[17px]"
-                />
-
-              </div>
-
-              <div className="absolute bottom-3 right-3 flex h-7 w-7 items-center justify-center rounded-lg bg-white/10 text-white backdrop-blur sm:bottom-5 sm:right-5 sm:h-9 sm:w-9 sm:rounded-xl">
-
-                <Users
-                  size={14}
-                  className="sm:h-[17px] sm:w-[17px]"
-                />
-
-              </div>
-
+              <UsersRound
+                size={18}
+                className="absolute bottom-5 right-5 text-white/70"
+              />
             </div>
 
-            {/* ========================= */}
-            {/* CONTEÚDO PARCEIROS */}
-            {/* ========================= */}
+            <div className="flex flex-1 flex-col p-5">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600">
+                Parcerias
+              </span>
 
-            <div className="flex flex-1 flex-col p-3 sm:p-4">
-
-              <p className="text-[8px] font-bold uppercase tracking-wider text-blue-600 sm:text-[10px]">
-                Parceiros
-              </p>
-
-              <h3 className="mt-0.5 text-base font-bold text-slate-900 sm:mt-1 sm:text-lg">
-                Crescemos com quem acredita
+              <h3 className="mt-2 text-xl font-bold text-slate-900">
+                Crescemos com quem acredita.
               </h3>
 
-              <p className="mt-1.5 text-[10px] leading-4 text-slate-500 sm:mt-2 sm:text-xs sm:leading-5">
-                A NexusOn está aberta à colaboração com instituições,
-                empresas, mentores e organizações que queiram contribuir
-                para o desenvolvimento de ideias e projetos.
+              <p className="mt-3 text-sm leading-6 text-slate-600">
+                Estamos abertos à colaboração com instituições,
+                empresas, mentores e organizações que queiram
+                contribuir para o desenvolvimento de ideias e projetos.
               </p>
 
-              {/* CTA */}
-
-              <div className="mt-auto pt-3 sm:pt-4">
-
-                <button
-                  type="button"
-                  onClick={contactPartner}
-                  className="group/partner flex w-full items-center justify-between rounded-lg border border-blue-100 bg-blue-50 px-3 py-2 text-[10px] font-semibold text-blue-700 transition-all duration-200 hover:border-blue-600 hover:bg-blue-600 hover:text-white active:scale-[0.98] sm:rounded-xl sm:py-2.5 sm:text-xs"
-                >
-
-                  <span>
-                    Quero ser parceiro
-                  </span>
-
-                  <ArrowUpRight
-                    size={13}
-                    className="transition-transform duration-300 group-hover/partner:translate-x-0.5 group-hover/partner:-translate-y-0.5 sm:h-[15px] sm:w-[15px]"
-                  />
-
-                </button>
-
-              </div>
-
+              <button
+                type="button"
+                onClick={() =>
+                  whatsapp(
+                    "Olá! Tenho interesse em ser parceiro do NexusOn. Gostaria de saber mais sobre as oportunidades de parceria.",
+                  )
+                }
+                className="mt-6 flex items-center justify-between rounded-xl bg-blue-50 px-4 py-3 text-sm font-semibold text-blue-700 transition hover:bg-blue-600 hover:text-white"
+              >
+                Quero ser parceiro
+                <ArrowUpRight size={16} />
+              </button>
             </div>
-
           </article>
 
         </div>
-
       </div>
     </section>
   );

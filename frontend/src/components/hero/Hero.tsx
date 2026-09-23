@@ -332,12 +332,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Indicador inferior */}
-      <div className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 items-center gap-2 text-xs font-medium text-slate-400 sm:flex">
-        <span>Descobre o que podes construir</span>
-
-        <ArrowRight size={14} />
-      </div>
     </section>
   );
 }

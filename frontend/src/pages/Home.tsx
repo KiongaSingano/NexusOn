@@ -5,6 +5,7 @@ import Hero from "../components/hero/Hero";
 import Statistics from "../components/statistics/Statistics";
 import Team from "../components/team/Team";
 import FAQ from "../components/faq/FAQ";
+import Benefits from "../components/benefits/Benefits";
 import Footer from "../components/footer/Footer";
 import ChatAssistant from "../components/chatbot/ChatAssistant";
 
@@ -18,6 +19,7 @@ export default function Home() {
 
       <main>
         <Hero />
+        <Benefits />
 
         <Statistics />
 

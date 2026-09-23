@@ -7,195 +7,124 @@ import {
   UsersRound,
 } from "lucide-react";
 
-interface Statistic {
-  label: string;
-  value: number;
-  icon: typeof Lightbulb;
-}
-
-const statistics: Statistic[] = [
-  {
-    label: "Ideias",
-    value: 3,
-    icon: Lightbulb,
-  },
-  {
-    label: "Projetos",
-    value: 0,
-    icon: Rocket,
-  },
-  {
-    label: "Soluções",
-    value: 0,
-    icon: Puzzle,
-  },
-  {
-    label: "Mentorias",
-    value: 0,
-    icon: UsersRound,
-  },
-  {
-    label: "Estudantes",
-    value: 0,
-    icon: GraduationCap,
-  },
-];
+const statistics = [
+  ["Ideias", 3, Lightbulb],
+  ["Projetos", 0, Rocket],
+  ["Soluções", 0, Puzzle],
+  ["Mentorias", 0, UsersRound],
+  ["Estudantes", 0, GraduationCap],
+] as const;
 
 function AnimatedNumber({
   value,
-  start,
+  active,
 }: {
   value: number;
-  start: boolean;
+  active: boolean;
 }) {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (!start) return;
+    if (!active) return;
 
     if (value === 0) {
       setCount(0);
       return;
     }
 
-    const duration = 1200;
-    const startTime = performance.now();
+    const start = performance.now();
+    const duration = 1000;
 
-    const animate = (currentTime: number) => {
-      const progress = Math.min(
-        (currentTime - startTime) / duration,
-        1,
-      );
+    const animate = (time: number) => {
+      const progress = Math.min((time - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
 
-      const easedProgress =
-        1 - Math.pow(1 - progress, 3);
-
-      setCount(
-        Math.floor(easedProgress * value),
-      );
+      setCount(Math.floor(eased * value));
 
       if (progress < 1) {
         requestAnimationFrame(animate);
-      } else {
-        setCount(value);
       }
     };
 
     requestAnimationFrame(animate);
-  }, [start, value]);
+  }, [active, value]);
 
   return <>{count}</>;
 }
 
 export default function Statistics() {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const element = sectionRef.current;
-
-    if (!element) return;
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          setVisible(true);
           observer.disconnect();
         }
       },
-      {
-        threshold: 0.2,
-      },
+      { threshold: 0.2 },
     );
 
-    observer.observe(element);
+    if (sectionRef.current) observer.observe(sectionRef.current);
 
     return () => observer.disconnect();
   }, []);
 
-return (
-  <section
-    ref={sectionRef}
-    className="relative overflow-hidden bg-slate-50"
-  >
-    {/* Elementos decorativos */}
-    <div className="pointer-events-none absolute inset-0">
-      <div className="absolute left-1/4 top-0 h-32 w-32 rounded-full bg-blue-100/40 blur-3xl" />
+  return (
+    <section
+      ref={sectionRef}
+      className="border-y border-slate-100 bg-slate-50"
+    >
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
 
-      <div className="absolute bottom-0 right-1/4 h-32 w-32 rounded-full bg-indigo-100/30 blur-3xl" />
-    </div>
+        <div className="mb-9 text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-600">
+            NexusOn em movimento
+          </p>
 
-    <div className="relative mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+          <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+            Ideias que começam a ganhar forma.
+          </h2>
+        </div>
 
-      {/* Título */}
-      <div className="mb-8 text-center sm:mb-10">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-600">
-          O ecossistema NexusOn
-        </p>
-
-        <h2 className="mt-2 text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
-          Onde ideias começam a ganhar forma.
-        </h2>
-      </div>
-
-      {/* Estatísticas */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
-
-        {statistics.map((statistic, index) => {
-          const Icon = statistic.icon;
-
-          return (
+        <div className="grid grid-cols-2 rounded-2xl border border-slate-200 bg-white shadow-sm sm:grid-cols-3 lg:grid-cols-5">
+          {statistics.map(([label, value, Icon], index) => (
             <div
-              key={statistic.label}
+              key={label}
               className={`
-                relative flex flex-col items-center
-                justify-center py-3 text-center
-                transition-all duration-700
-                ${
-                  isVisible
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-4 opacity-0"
-                }
+                relative flex flex-col items-center px-4 py-7 text-center
+                transition-all duration-500
+                ${visible ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"}
               `}
-              style={{
-                transitionDelay: `${index * 100}ms`,
-              }}
+              style={{ transitionDelay: `${index * 80}ms` }}
             >
-              {/* Separador */}
               {index > 0 && (
-                <div className="absolute left-0 top-1/2 hidden h-12 -translate-y-1/2 border-l border-slate-200 lg:block" />
+                <span className="absolute left-0 top-1/2 hidden h-10 -translate-y-1/2 border-l border-slate-200 lg:block" />
               )}
 
-              {/* Ícone */}
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-                <Icon
-                  size={18}
-                  strokeWidth={1.8}
-                />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                <Icon size={19} strokeWidth={1.8} />
               </div>
 
-              {/* Número */}
-              <div className="mt-3 text-2xl font-bold leading-none tracking-tight text-slate-900 sm:text-3xl">
-                <AnimatedNumber
-                  value={statistic.value}
-                  start={isVisible}
-                />
-
-                {statistic.value > 0 && (
-                  <span className="text-blue-600">+</span>
-                )}
+              <div className="mt-4 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+                <AnimatedNumber value={value} active={visible} />
+                {value > 0 && <span className="text-blue-600">+</span>}
               </div>
 
-              {/* Label */}
-              <p className="mt-1.5 text-xs font-medium text-slate-500 sm:text-sm">
-                {statistic.label}
-              </p>
+              <span className="mt-1 text-xs font-medium text-slate-500 sm:text-sm">
+                {label}
+              </span>
             </div>
-          );
-        })}
+          ))}
+        </div>
+
+        <p className="mt-5 text-center text-xs text-slate-400">
+          Números atualizados à medida que o ecossistema cresce.
+        </p>
 
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
 }
