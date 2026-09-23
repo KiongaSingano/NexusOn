@@ -1,4 +1,5 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
+import type { FormEvent } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -39,7 +40,9 @@ export default function Register() {
       [field]: value,
     }));
 
-    if (error) setError("");
+    if (error) {
+      setError("");
+    }
   };
 
   const inputClass = (field: string) => `
@@ -72,7 +75,9 @@ export default function Register() {
     setStep(1);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (
+    event: FormEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
 
     if (form.password.length < 6) {
@@ -122,31 +127,41 @@ export default function Register() {
       <div className="relative z-10 flex min-h-screen items-center justify-end px-4 py-6 sm:px-8 lg:px-12 xl:px-20">
         <div className="w-full max-w-md">
 
-          {/* Modal */}
+          {/* Card */}
           <div
             className="
               group relative overflow-hidden rounded-[2rem]
-              border border-white/25 bg-white/[0.12]
-              p-5 shadow-2xl shadow-black/30
+              border border-white/25
+              bg-white/[0.12]
+              p-5
+              shadow-2xl shadow-black/30
               backdrop-blur-2xl
-              transition hover:bg-white/[0.15]
+              transition
+              hover:bg-white/[0.15]
               sm:p-6
             "
           >
+            {/* Glow */}
             <div
               className="
                 pointer-events-none absolute -right-24 -top-24
-                h-48 w-48 rounded-full bg-white/20 blur-3xl
+                h-48 w-48 rounded-full
+                bg-white/20 blur-3xl
                 transition-transform duration-700
-                group-hover:translate-x-6 group-hover:translate-y-6
+                group-hover:translate-x-6
+                group-hover:translate-y-6
               "
             />
 
+            {/* Linha superior */}
             <div
               className="
-                pointer-events-none absolute inset-x-0 top-0 h-px
-                bg-gradient-to-r from-transparent
-                via-white/60 to-transparent
+                pointer-events-none absolute inset-x-0 top-0
+                h-px
+                bg-gradient-to-r
+                from-transparent
+                via-white/60
+                to-transparent
               "
             />
 
@@ -155,30 +170,53 @@ export default function Register() {
               <div className="mb-4 flex justify-center">
                 <div
                   className="
-                    flex h-10 w-10 items-center justify-center
-                    rounded-xl border border-white/20
-                    bg-white/10 text-white shadow-lg
+                    flex h-10 w-10
+                    items-center justify-center
+                    rounded-xl
+                    border border-white/20
+                    bg-white/10
+                    text-white
+                    shadow-lg
                     backdrop-blur-xl
                   "
                 >
-                  <UserPlus size={19} strokeWidth={1.8} />
+                  <UserPlus
+                    size={19}
+                    strokeWidth={1.8}
+                  />
                 </div>
               </div>
 
-              <h1 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
+              <h1
+                className="
+                  text-2xl font-extrabold
+                  tracking-tight text-white
+                  sm:text-3xl
+                "
+              >
                 Cria a tua conta
               </h1>
 
-              <p className="mx-auto mt-2 max-w-sm text-sm leading-5 text-white/65">
+              <p
+                className="
+                  mx-auto mt-2 max-w-sm
+                  text-sm leading-5 text-white/65
+                "
+              >
                 {step === 1
                   ? "Começa por indicar os teus dados pessoais."
                   : "Define uma palavra-passe segura para a tua conta."}
               </p>
             </header>
 
-            {/* Indicador */}
+            {/* Indicador das etapas */}
             <div className="relative mt-5">
-              <div className="absolute left-0 right-0 top-4 h-px bg-white/15" />
+              <div
+                className="
+                  absolute left-0 right-0 top-4
+                  h-px bg-white/15
+                "
+              />
 
               <div className="relative flex justify-between">
                 <Step
@@ -202,7 +240,8 @@ export default function Register() {
               onSubmit={handleSubmit}
               className="relative mt-5"
             >
-              {step === 1 ? (
+              {/* ETAPA 1 */}
+              {step === 1 && (
                 <div className="space-y-3.5">
 
                   <Field
@@ -212,7 +251,6 @@ export default function Register() {
                     value={form.name}
                     placeholder="O teu nome completo"
                     autoComplete="name"
-                    focused={focused}
                     setFocused={setFocused}
                     onChange={(value) =>
                       updateField("name", value)
@@ -227,7 +265,6 @@ export default function Register() {
                     value={form.phone}
                     placeholder="+244 9XX XXX XXX"
                     autoComplete="tel"
-                    focused={focused}
                     setFocused={setFocused}
                     onChange={(value) =>
                       updateField("phone", value)
@@ -242,7 +279,6 @@ export default function Register() {
                     value={form.email}
                     placeholder="exemplo@email.com"
                     autoComplete="email"
-                    focused={focused}
                     setFocused={setFocused}
                     onChange={(value) =>
                       updateField("email", value)
@@ -251,7 +287,9 @@ export default function Register() {
                   />
 
                   {error && (
-                    <ErrorMessage>{error}</ErrorMessage>
+                    <ErrorMessage>
+                      {error}
+                    </ErrorMessage>
                   )}
 
                   <button
@@ -259,13 +297,15 @@ export default function Register() {
                     onClick={nextStep}
                     className="
                       group/btn mt-1 flex w-full
-                      items-center justify-center gap-2
-                      rounded-xl border border-blue-300/30
+                      items-center justify-center
+                      gap-2 rounded-xl
+                      border border-blue-300/30
                       bg-blue-600/90 px-5 py-3
                       text-sm font-bold text-white
                       shadow-lg shadow-blue-950/30
                       transition
-                      hover:-translate-y-0.5 hover:bg-blue-500
+                      hover:-translate-y-0.5
+                      hover:bg-blue-500
                     "
                   >
                     Continuar
@@ -279,35 +319,39 @@ export default function Register() {
                     />
                   </button>
                 </div>
-              ) : (
+              )}
+
+              {/* ETAPA 2 */}
+              {step === 2 && (
                 <div className="space-y-3.5">
 
-                  {/* Palavra-passe */}
                   <PasswordField
                     id="password"
                     label="Palavra-passe"
                     value={form.password}
                     placeholder="Cria uma palavra-passe"
                     show={showPassword}
-                    focused={focused}
                     setFocused={setFocused}
                     onToggle={() =>
-                      setShowPassword((value) => !value)
+                      setShowPassword(
+                        (value) => !value
+                      )
                     }
                     onChange={(value) =>
-                      updateField("password", value)
+                      updateField(
+                        "password",
+                        value
+                      )
                     }
                     inputClass={inputClass}
                   />
 
-                  {/* Confirmar */}
                   <PasswordField
                     id="confirmPassword"
                     label="Confirmar palavra-passe"
                     value={form.confirmPassword}
                     placeholder="Repete a palavra-passe"
                     show={showConfirmPassword}
-                    focused={focused}
                     setFocused={setFocused}
                     onToggle={() =>
                       setShowConfirmPassword(
@@ -324,38 +368,64 @@ export default function Register() {
                   />
 
                   {/* Termos */}
-                  <label className="flex cursor-pointer items-start gap-3 pt-1">
+                  <label
+                    className="
+                      flex cursor-pointer
+                      items-start gap-3 pt-1
+                    "
+                  >
                     <input
                       type="checkbox"
                       checked={accepted}
                       onChange={(event) =>
-                        setAccepted(event.target.checked)
+                        setAccepted(
+                          event.target.checked
+                        )
                       }
-                      className="mt-1 h-4 w-4 accent-blue-600"
+                      className="
+                        mt-1 h-4 w-4
+                        accent-blue-600
+                      "
                     />
 
-                    <span className="text-xs leading-5 text-white/55">
-                      Concordo com os termos de utilização
-                      e a política de privacidade do
-                      NexusOn.
+                    <span
+                      className="
+                        text-xs leading-5
+                        text-white/55
+                      "
+                    >
+                      Concordo com os termos de
+                      utilização e a política de
+                      privacidade do NexusOn.
                     </span>
                   </label>
 
                   {error && (
-                    <ErrorMessage>{error}</ErrorMessage>
+                    <ErrorMessage>
+                      {error}
+                    </ErrorMessage>
                   )}
 
                   {/* Botões */}
-                  <div className="grid grid-cols-[auto_1fr] gap-3 pt-1">
+                  <div
+                    className="
+                      grid grid-cols-[auto_1fr]
+                      gap-3 pt-1
+                    "
+                  >
                     <button
                       type="button"
                       onClick={previousStep}
                       className="
-                        flex items-center justify-center gap-2
-                        rounded-xl border border-white/15
+                        flex items-center
+                        justify-center gap-2
+                        rounded-xl
+                        border border-white/15
                         bg-white/10 px-4 py-3
-                        text-sm font-semibold text-white/80
-                        transition hover:bg-white/15
+                        text-sm font-semibold
+                        text-white/80
+                        transition
+                        hover:bg-white/15
                         hover:text-white
                       "
                     >
@@ -367,12 +437,14 @@ export default function Register() {
                       type="submit"
                       disabled={loading}
                       className="
-                        group/btn flex items-center
-                        justify-center gap-2
-                        rounded-xl border border-blue-300/30
+                        group/btn flex
+                        items-center justify-center
+                        gap-2 rounded-xl
+                        border border-blue-300/30
                         bg-blue-600/90 px-5 py-3
                         text-sm font-bold text-white
-                        shadow-lg shadow-blue-950/30
+                        shadow-lg
+                        shadow-blue-950/30
                         transition
                         hover:bg-blue-500
                         disabled:cursor-not-allowed
@@ -401,12 +473,21 @@ export default function Register() {
             </form>
 
             {/* Rodapé */}
-            <footer className="relative mt-4 border-t border-white/10 pt-4 text-center">
+            <footer
+              className="
+                relative mt-4
+                border-t border-white/10
+                pt-4 text-center
+              "
+            >
               <p className="text-sm text-white/60">
                 Já tens uma conta?{" "}
                 <Link
                   to="/entrar"
-                  className="font-bold text-blue-200 transition hover:text-white"
+                  className="
+                    font-bold text-blue-200
+                    transition hover:text-white
+                  "
                 >
                   Entrar
                 </Link>
@@ -415,8 +496,10 @@ export default function Register() {
               <Link
                 to="/"
                 className="
-                  mt-3 inline-block text-xs font-medium
-                  text-white/40 transition hover:text-white/70
+                  mt-3 inline-block
+                  text-xs font-medium
+                  text-white/40
+                  transition hover:text-white/70
                 "
               >
                 ← Voltar para o NexusOn
@@ -424,8 +507,15 @@ export default function Register() {
             </footer>
           </div>
 
-          <p className="mt-4 text-center text-[11px] text-white/45">
-            Começa com uma ideia. O NexusOn ajuda a dar-lhe direção.
+          {/* Frase inferior */}
+          <p
+            className="
+              mt-4 text-center
+              text-[11px] text-white/45
+            "
+          >
+            Começa com uma ideia. O NexusOn
+            ajuda a dar-lhe direção.
           </p>
         </div>
       </div>
@@ -433,7 +523,9 @@ export default function Register() {
   );
 }
 
-/* ---------- Componentes auxiliares ---------- */
+/* =====================================================
+   INDICADOR DE ETAPA
+===================================================== */
 
 function Step({
   number,
@@ -450,8 +542,10 @@ function Step({
     <div className="flex flex-col items-center gap-1.5">
       <div
         className={`
-          flex h-8 w-8 items-center justify-center
-          rounded-full border text-xs font-bold
+          flex h-8 w-8
+          items-center justify-center
+          rounded-full border
+          text-xs font-bold
           transition-all duration-300
           ${
             active
@@ -460,15 +554,29 @@ function Step({
           }
         `}
       >
-        {completed ? <Check size={15} /> : number}
+        {completed ? (
+          <Check size={15} />
+        ) : (
+          number
+        )}
       </div>
 
-      <span className="text-[11px] font-medium text-white/60">
+      <span
+        className="
+          text-[11px]
+          font-medium
+          text-white/60
+        "
+      >
         {label}
       </span>
     </div>
   );
 }
+
+/* =====================================================
+   CAMPO NORMAL
+===================================================== */
 
 function Field({
   id,
@@ -477,7 +585,6 @@ function Field({
   value,
   placeholder,
   autoComplete,
-  focused,
   setFocused,
   onChange,
   inputClass,
@@ -488,7 +595,6 @@ function Field({
   value: string;
   placeholder: string;
   autoComplete: string;
-  focused: string;
   setFocused: (value: string) => void;
   onChange: (value: string) => void;
   inputClass: (field: string) => string;
@@ -497,7 +603,11 @@ function Field({
     <div>
       <label
         htmlFor={id}
-        className="mb-1.5 block text-sm font-medium text-white/85"
+        className="
+          mb-1.5 block
+          text-sm font-medium
+          text-white/85
+        "
       >
         {label}
       </label>
@@ -520,13 +630,16 @@ function Field({
   );
 }
 
+/* =====================================================
+   CAMPO DE PALAVRA-PASSE
+===================================================== */
+
 function PasswordField({
   id,
   label,
   value,
   placeholder,
   show,
-  focused,
   setFocused,
   onToggle,
   onChange,
@@ -537,7 +650,6 @@ function PasswordField({
   value: string;
   placeholder: string;
   show: boolean;
-  focused: string;
   setFocused: (value: string) => void;
   onToggle: () => void;
   onChange: (value: string) => void;
@@ -547,7 +659,11 @@ function PasswordField({
     <div>
       <label
         htmlFor={id}
-        className="mb-1.5 block text-sm font-medium text-white/85"
+        className="
+          mb-1.5 block
+          text-sm font-medium
+          text-white/85
+        "
       >
         {label}
       </label>
@@ -579,10 +695,14 @@ function PasswordField({
           }
           className="
             absolute right-2.5 top-1/2
-            flex h-8 w-8 -translate-y-1/2
-            items-center justify-center rounded-lg
-            text-white/50 transition
-            hover:bg-white/10 hover:text-white
+            flex h-8 w-8
+            -translate-y-1/2
+            items-center justify-center
+            rounded-lg
+            text-white/50
+            transition
+            hover:bg-white/10
+            hover:text-white
           "
         >
           {show ? (
@@ -596,13 +716,25 @@ function PasswordField({
   );
 }
 
+/* =====================================================
+   MENSAGEM DE ERRO
+===================================================== */
+
 function ErrorMessage({
   children,
 }: {
   children: string;
 }) {
   return (
-    <p className="rounded-lg bg-red-500/10 px-3 py-2 text-xs text-red-200">
+    <p
+      className="
+        rounded-lg
+        bg-red-500/10
+        px-3 py-2
+        text-xs
+        text-red-200
+      "
+    >
       {children}
     </p>
   );
