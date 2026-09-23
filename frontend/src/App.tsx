@@ -11,6 +11,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Opportunities from "./pages/Opportunities";
+import Communities from "./pages/Communities";
+import Contacts from "./pages/Contacts";
 
 function AppContent() {
   const { announcementVisible } = useAnnouncement();
@@ -48,6 +50,12 @@ function AppContent() {
           <Route
             path="/oportunidades"
             element={<Opportunities />}
+          />
+          <Route
+            path="/comunidades" element={<Communities />}
+          />
+          <Route
+            path="/contactos" element={<Contacts />}
           />
         </Routes>
       </div>

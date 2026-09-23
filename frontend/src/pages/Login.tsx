@@ -1,108 +1,293 @@
+import { FormEvent, useState } from "react";
+import {
+  ArrowRight,
+  Eye,
+  EyeOff,
+  LockKeyhole,
+} from "lucide-react";
 import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+
+import authImage from "../assets/auth-nexuson.jpg";
 
 export default function Login() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [focused, setFocused] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const updateField = (
+    field: keyof typeof form,
+    value: string
+  ) => {
+    setForm((current) => ({
+      ...current,
+      [field]: value,
+    }));
+
+    if (error) setError("");
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!form.email || !form.password) {
+      setError("Preenche o e-mail e a palavra-passe.");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+
+    // Preparado para ligar ao backend.
+    setTimeout(() => {
+      setLoading(false);
+    }, 800);
+  };
+
+  const inputClass = (field: string) => `
+    w-full rounded-xl border bg-black/10 px-4 py-3
+    text-sm text-white outline-none transition
+    placeholder:text-white/35
+    ${
+      focused === field
+        ? "border-blue-300/80 bg-white/10 ring-4 ring-blue-400/10"
+        : "border-white/15"
+    }
+  `;
+
   return (
-    <main className="min-h-screen bg-slate-50">
-      {/* Voltar ao NexusOn */}
-      <Link
-        to="/"
-        aria-label="Voltar ao NexusOn"
-        className="fixed left-4 top-4 z-50 inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white/90 px-3 py-2.5 text-sm font-semibold text-slate-700 shadow-sm backdrop-blur-md transition-all hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600 sm:left-5 sm:top-5 sm:px-4"
-      >
-        <ArrowLeft size={17} />
+    <main className="relative min-h-screen overflow-hidden">
+      <img
+        src={authImage}
+        alt=""
+        className="absolute inset-0 h-full w-full scale-105 object-cover"
+      />
 
-        <span className="hidden sm:inline">
-          Voltar ao Nexus<span className="text-blue-600">On</span>
-        </span>
+      <div className="absolute inset-0 bg-slate-950/40" />
 
-        <span className="sm:hidden">
-          Nexus<span className="text-blue-600">On</span>
-        </span>
-      </Link>
+      <div className="absolute -right-32 top-1/4 h-96 w-96 animate-pulse rounded-full bg-blue-500/20 blur-3xl" />
 
-      {/* Conteúdo */}
-      <div className="flex min-h-screen items-center justify-center px-5 py-24">
+      <div className="absolute -bottom-32 left-1/4 h-80 w-80 rounded-full bg-cyan-400/10 blur-3xl" />
+
+      <div className="relative z-10 flex min-h-screen items-center justify-end px-4 py-6 sm:px-8 lg:px-12 xl:px-20">
         <div className="w-full max-w-md">
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-900/5 sm:p-8">
 
-            {/* Logo */}
-            <div className="mb-8 text-center">
-              <h1 className="text-2xl font-bold tracking-tight text-slate-950">
-                Nexus<span className="text-blue-600">On</span>
+          <div className="
+            group relative overflow-hidden rounded-[2rem]
+            border border-white/25 bg-white/[0.12]
+            p-5 shadow-2xl shadow-black/30
+            backdrop-blur-2xl
+            transition hover:bg-white/[0.15]
+            sm:p-6
+          ">
+
+            <div className="
+              pointer-events-none absolute -right-24 -top-24
+              h-48 w-48 rounded-full bg-white/20 blur-3xl
+              transition-transform duration-700
+              group-hover:translate-x-6 group-hover:translate-y-6
+            " />
+
+            <div className="
+              pointer-events-none absolute inset-x-0 top-0 h-px
+              bg-gradient-to-r from-transparent via-white/60 to-transparent
+            " />
+
+            {/* Cabeçalho */}
+            <header className="relative text-center">
+              <div className="mb-4 flex justify-center">
+                <div className="
+                  flex h-10 w-10 items-center justify-center
+                  rounded-xl border border-white/20
+                  bg-white/10 text-white shadow-lg
+                  backdrop-blur-xl
+                ">
+                  <LockKeyhole size={19} strokeWidth={1.8} />
+                </div>
+              </div>
+
+              <h1 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
+                Bem-vindo de volta
               </h1>
 
-              <p className="mt-2 text-sm text-slate-500">
-                Entra na tua conta
+              <p className="mx-auto mt-2 max-w-sm text-sm leading-5 text-white/65">
+                Entra na tua conta para continuar a
+                explorar o NexusOn.
               </p>
-            </div>
+            </header>
 
             {/* Formulário */}
-            <form className="space-y-5">
-
-              {/* Email */}
+            <form
+              onSubmit={handleSubmit}
+              className="relative mt-5 space-y-4"
+            >
+              {/* E-mail */}
               <div>
                 <label
                   htmlFor="email"
-                  className="mb-2 block text-sm font-semibold text-slate-700"
+                  className="mb-1.5 block text-sm font-medium text-white/85"
                 >
-                  Email
+                  E-mail
                 </label>
 
                 <input
                   id="email"
+                  name="email"
                   type="email"
-                  placeholder="teuemail@exemplo.com"
-                  className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+                  required
+                  autoComplete="email"
+                  value={form.email}
+                  placeholder="exemplo@email.com"
+                  onChange={(e) =>
+                    updateField("email", e.target.value)
+                  }
+                  onFocus={() => setFocused("email")}
+                  onBlur={() => setFocused("")}
+                  className={inputClass("email")}
                 />
               </div>
 
               {/* Palavra-passe */}
               <div>
-                <div className="mb-2 flex items-center justify-between">
+                <div className="mb-1.5 flex items-center justify-between">
                   <label
                     htmlFor="password"
-                    className="text-sm font-semibold text-slate-700"
+                    className="text-sm font-medium text-white/85"
                   >
                     Palavra-passe
                   </label>
 
-                  <button
-                    type="button"
-                    className="text-xs font-semibold text-blue-600 hover:text-blue-700"
+                  <Link
+                    to="/recuperar-senha"
+                    className="text-xs font-medium text-blue-200 transition hover:text-white"
                   >
-                    Esqueceste?
-                  </button>
+                    Esqueci as minhas credenciais
+                  </Link>
                 </div>
 
-                <input
-                  id="password"
-                  type="password"
-                  placeholder="••••••••"
-                  className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
-                />
+                <div className="relative">
+                  <input
+                    id="password"
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    required
+                    minLength={6}
+                    autoComplete="current-password"
+                    value={form.password}
+                    placeholder="A tua palavra-passe"
+                    onChange={(e) =>
+                      updateField("password", e.target.value)
+                    }
+                    onFocus={() => setFocused("password")}
+                    onBlur={() => setFocused("")}
+                    className={`${inputClass("password")} pr-12`}
+                  />
+
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((value) => !value)}
+                    aria-label={
+                      showPassword
+                        ? "Ocultar palavra-passe"
+                        : "Mostrar palavra-passe"
+                    }
+                    className="
+                      absolute right-2.5 top-1/2
+                      flex h-8 w-8 -translate-y-1/2
+                      items-center justify-center rounded-lg
+                      text-white/50 transition
+                      hover:bg-white/10 hover:text-white
+                    "
+                  >
+                    {showPassword ? (
+                      <EyeOff size={17} />
+                    ) : (
+                      <Eye size={17} />
+                    )}
+                  </button>
+                </div>
               </div>
+
+              {/* Erro */}
+              {error && (
+                <p className="rounded-lg bg-red-500/10 px-3 py-2 text-xs text-red-200">
+                  {error}
+                </p>
+              )}
 
               {/* Entrar */}
               <button
                 type="submit"
-                className="w-full rounded-xl bg-blue-600 px-5 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition-all duration-200 hover:bg-blue-700 hover:shadow-xl active:scale-[0.98]"
+                disabled={loading}
+                className="
+                  group/btn relative flex w-full
+                  items-center justify-center gap-2
+                  overflow-hidden rounded-xl
+                  border border-blue-300/30
+                  bg-blue-600/90 px-5 py-3
+                  text-sm font-bold text-white
+                  shadow-lg shadow-blue-950/30
+                  transition
+                  hover:-translate-y-0.5 hover:bg-blue-500
+                  disabled:cursor-not-allowed disabled:opacity-60
+                "
               >
-                Entrar
+                <span className="
+                  absolute inset-0 -translate-x-full
+                  bg-gradient-to-r from-transparent
+                  via-white/20 to-transparent
+                  transition-transform duration-700
+                  group-hover/btn:translate-x-full
+                " />
+
+                <span className="relative">
+                  {loading ? "A entrar..." : "Entrar"}
+                </span>
+
+                {!loading && (
+                  <ArrowRight
+                    size={17}
+                    className="
+                      relative transition-transform
+                      group-hover/btn:translate-x-1
+                    "
+                  />
+                )}
               </button>
             </form>
 
-            {/* Registro */}
-            <p className="mt-7 text-center text-sm text-slate-500">
-              Ainda não tens uma conta?{" "}
+            {/* Rodapé */}
+            <footer className="relative mt-5 border-t border-white/10 pt-4 text-center">
+              <p className="text-sm text-white/60">
+                Ainda não tens uma conta?{" "}
+                <Link
+                  to="/criar-conta"
+                  className="font-bold text-blue-200 transition hover:text-white"
+                >
+                  Criar conta
+                </Link>
+              </p>
+
               <Link
-                to="/criar-conta"
-                className="font-semibold text-blue-600 hover:text-blue-700"
+                to="/"
+                className="
+                  mt-3 inline-block text-xs font-medium
+                  text-white/40 transition hover:text-white/70
+                "
               >
-                Criar conta
+                ← Voltar para o NexusOn
               </Link>
-            </p>
+            </footer>
           </div>
+
+          <p className="mt-4 text-center text-[11px] text-white/45">
+            A tua conta, os teus projetos, as tuas oportunidades.
+          </p>
         </div>
       </div>
     </main>
